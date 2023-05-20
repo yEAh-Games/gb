@@ -9,10 +9,8 @@
     <meta name="theme-color" content="#477c59" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="#477c59">
     <link rel="stylesheet" href="/styles/index.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
-
     <script src="/bower_components/webcomponentsjs/webcomponents.min.js"></script>
     <link rel="import" href="/bower_components/jsgbc-ui/jsgbc-ui.html" />
 </head>
@@ -34,53 +32,38 @@
                         <input id="fileInput" type="file" accept=".gb,.gbc,.zip" />
                     </file-button>
 
-                    <file-button id="download-save" class="disabled">
+                    <file-button style="color:black;position:absolute;top:660px;right:577px" id="download-save"
+                        class="disabled">
                         <div class="text">Download Save</div>
                         <i class="far fa-arrow-alt-circle-down fa-3x"></i>
                     </file-button>
 
-                    <file-button id="upload-save" class="disabled">
+                    <file-button style="color:black;position:absolute;top:660px;left:577px" id="upload-save"
+                        class="disabled">
                         <div class="text">Upload Save</div>
                         <i class="far fa-arrow-alt-circle-up fa-3x"></i>
                         <input type="file" accept=".sav" />
                     </file-button>
+
                 </div>
             </div>
         </div>
-        <button title="Load the requested game from the server into the emulator." style="display: block; margin: 0 auto; padding: 10px 20px; font-size: 16px; font-weight: bold; text-align: center; text-decoration: none; border-radius: 4px; cursor: pointer; transition: background-color 0.3s ease; color: #fff; background-color: #007bff; border: none;"
-            onmouseover="this.style.backgroundColor='#0056b3';" onmouseout="this.style.backgroundColor='#007bff';" onclick="simulateFileInput('./game.gb')" ">
-  Load game
-</button>
+
+        <div id="overlay">
+            <div class="overlay-content">
+                <button title="Load the requested game from the server into the emulator."
+                    style="background-color:#007bff;color:white!important" class="loadbutton"
+                    onmouseover="this.style.backgroundColor='#0056b3';"
+                    onmouseout="this.style.backgroundColor='#007bff';" onclick="simulateFileInput('./game.gb')"
+                    id="closeOverlayBtn">Load game</button>
+            </div>
+        </div>
+
     </div>
 
-    <script>
-        window.addEventListener("WebComponentsReady ", function() {
-            window.WebComponentsReady = true;
-        });
-    </script>
-    <script src="/assets/jsgbc-web.js "></script>
-    <script>
-        function simulateFileInput(url) {
-            fetch(url)
-                .then(response => response.blob())
-                .then(blob => {
-                    const file = new File([blob], 'game.gb');
-
-                    const fileInput = document.getElementById('fileInput');
-                    const dataTransfer = new DataTransfer();
-                    dataTransfer.items.add(file);
-                    fileInput.files = dataTransfer.files;
-
-                    const changeEvent = new Event('change', {
-                        bubbles: true
-                    });
-                    fileInput.dispatchEvent(changeEvent);
-                })
-                .catch(error => {
-                    console.error(error);
-                });
-        }
-    </script>
+    <script src=" /assets/jsgbc-web.js "></script>
+    <script src=" /assets/index.js"></script>
+    
 </body>
 
 </html>
